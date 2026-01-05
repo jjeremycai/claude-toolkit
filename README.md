@@ -19,7 +19,8 @@ claude --plugin-dir /path/to/claude-toolkit
 ```
 claude-toolkit/
 ├── plugins/           # MCP-based plugins
-│   └── ashby/         # Ashby ATS integration
+│   ├── ashby/         # Ashby ATS integration
+│   └── missive/       # Missive email/inbox integration
 ├── agents/            # Specialized agents
 ├── commands/          # Slash commands
 └── skills/            # Knowledge skills
@@ -30,12 +31,14 @@ claude-toolkit/
 | Plugin | Description |
 |--------|-------------|
 | [ashby](./plugins/ashby/) | Ashby ATS integration - manage candidates, jobs, interviews |
+| [missive](./plugins/missive/) | Missive inbox integration - drafts, triage, labeling |
 
 ## Agents
 
 | Agent | Description |
 |-------|-------------|
 | ashby-recruiter | Recruiting pipeline management |
+| missive-draft-assistant | Inbox review and draft creation |
 | auditor | Codebase audit for simplicity |
 | auth-expert | Auth debugging (PKCE, OAuth, sessions) |
 | code-reviewer | Code review for quality and security |
@@ -66,8 +69,13 @@ claude-toolkit/
 |-------|-------------|
 | ashby-api-guide | Ashby API documentation |
 | ashby-workflows | Recruiting workflow guidance |
+| contact-management | Missive contact management |
 | cto-audit | CTO-level codebase audit |
+| draft-reply | Missive draft reply assistance |
 | frontend-design | Frontend engineering skill |
+| inbox-triage | Missive inbox triage |
+| labeling | Missive conversation labeling |
+| team-assignment | Missive team assignment |
 
 ## License
 

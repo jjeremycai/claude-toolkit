@@ -1,0 +1,8 @@
+{
+  "name": "missive",
+  "version": "0.1.0",
+  "description": "Missive email/messaging integration with full API coverage, drafting assistant, and inbox management skills",
+  "author": {
+    "name": "Jeremy Cai"
+  }
+}
