@@ -4,5 +4,6 @@
   "description": "Missive email/messaging integration with full API coverage, drafting assistant, and inbox management skills",
   "author": {
     "name": "Jeremy Cai"
-  }
+  },
+  "mcpServers": "./.mcp.json"
 }

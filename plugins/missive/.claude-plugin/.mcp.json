@@ -2,9 +2,9 @@
   "mcpServers": {
     "missive": {
       "command": "npx",
-      "args": ["tsx", "$PLUGIN_DIR/mcp/server.ts"],
+      "args": ["tsx", "${CLAUDE_PLUGIN_ROOT}/mcp/server.ts"],
       "env": {
-        "MISSIVE_API_TOKEN": "$MISSIVE_API_TOKEN"
+        "MISSIVE_API_TOKEN": "${MISSIVE_API_TOKEN}"
       }
     }
   }
