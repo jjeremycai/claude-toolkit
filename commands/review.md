@@ -39,14 +39,15 @@ gh pr diff <pr-number>
 
 Launch 3 parallel @code-reviewer subagents with different focus areas:
 
-1. **Agent #1: Bug Hunter** — Logic errors, edge cases, error handling
-2. **Agent #2: Security & Performance** — Vulnerabilities, O(n²) issues, N+1 queries
-3. **Agent #3: Codebase Fit** — Patterns, conventions, CLAUDE.md compliance
+1. **Agent #1: Bug Hunter** — Logic errors, edge cases, error handling. Ask: What would break this? What assumptions are unstated?
+2. **Agent #2: Security & Adversarial** — Vulnerabilities, trust boundaries, failure modes. Ask: What would a malicious caller do? Does it fail open or closed?
+3. **Agent #3: Codebase Fit** — Patterns, conventions, CLAUDE.md compliance. Ask: Is complexity justified? What would a tired maintainer misunderstand?
 
 Each agent should read the full files being modified (not just diffs) and return issues with:
 - File path and line number
 - Severity (critical/warning/suggestion)
-- Clear explanation of the problem
+- **Assumptions** the code makes (stated or unstated)
+- Clear explanation of the problem — name the realistic scenario
 - Suggested fix if applicable
 
 ## Verification Mode (--verify)
@@ -82,15 +83,19 @@ Skip if: backend-only, docs/config, no dev server.
 
 ## Output Format
 
+### Assumptions Surfaced
+
+List key assumptions the code makes about input, environment, and state. Unstated assumptions are future bugs.
+
 ### Issues Found
 
 Correlate all agent findings, deduplicate, rank by severity:
 
 **Critical** (must fix before merge)
-- [file:line] Issue description
+- [file:line] Issue description — realistic scenario
 
 **Warnings** (should fix)
-- [file:line] Issue description
+- [file:line] Issue description — realistic scenario
 
 **Suggestions** (consider)
 - [file:line] Issue description
