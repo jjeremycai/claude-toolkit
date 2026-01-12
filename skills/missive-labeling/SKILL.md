@@ -1,5 +1,5 @@
 ---
-name: labeling
+name: missive-labeling
 description: This skill should be used when the user asks to "label this conversation", "organize my inbox", "apply labels", "tag this email", "categorize conversations", or is working on inbox organization tasks in Missive.
 ---
 

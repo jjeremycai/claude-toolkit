@@ -1,5 +1,5 @@
 ---
-name: team-assignment
+name: missive-team-assignment
 description: This skill should be used when the user asks to "assign this to", "delegate this email", "who should handle this", "route this conversation", "hand off this thread", or is making decisions about conversation ownership in Missive.
 ---
 

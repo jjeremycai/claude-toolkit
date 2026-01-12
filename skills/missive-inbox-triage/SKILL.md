@@ -1,5 +1,5 @@
 ---
-name: inbox-triage
+name: missive-inbox-triage
 description: This skill should be used when the user asks to "triage my inbox", "prioritize emails", "what needs my attention", "sort through my messages", "help me process my inbox", or is reviewing conversations to determine what needs action in Missive.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: jobs
+name: ashby-jobs
 description: This skill should be used when the user asks to "list jobs", "find jobs", "view open positions", "search roles", or wants to search and list jobs in Ashby ATS.
 ---
 

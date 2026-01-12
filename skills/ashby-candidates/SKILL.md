@@ -1,5 +1,5 @@
 ---
-name: candidates
+name: ashby-candidates
 description: This skill should be used when the user asks to "find candidates", "search candidates", "look up candidate", "view applicant", or wants to search and list candidates in Ashby ATS.
 ---
 

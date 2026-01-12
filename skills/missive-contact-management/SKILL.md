@@ -1,5 +1,5 @@
 ---
-name: contact-management
+name: missive-contact-management
 description: This skill should be used when the user asks to "add a contact", "update contact info", "organize contacts", "find a contact", "manage contact groups", "import contacts", or is working with contact data in Missive.
 ---
 

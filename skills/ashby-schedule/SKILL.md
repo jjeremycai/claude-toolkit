@@ -1,5 +1,5 @@
 ---
-name: schedule
+name: ashby-schedule
 description: This skill should be used when the user asks to "schedule interview", "book interview", "set up interview time", "arrange interview", or wants to schedule an interview for a candidate in Ashby.
 ---
 

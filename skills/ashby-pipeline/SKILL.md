@@ -1,5 +1,5 @@
 ---
-name: pipeline
+name: ashby-pipeline
 description: This skill should be used when the user asks to "view pipeline", "show hiring funnel", "candidate pipeline", "recruiting stages", "move candidate", or wants to view and manage the recruiting pipeline for a job in Ashby.
 ---
 
