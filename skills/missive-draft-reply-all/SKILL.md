@@ -82,14 +82,21 @@ Reply from the email address the original was sent TO (check the to_fields of th
 ### 3. Brief Responses
 2-4 sentences unless more detail is needed.
 
-### 4. Paragraph Spacing
-Use ONE `<br>` between paragraphs (not two):
+### 4. Paragraph Spacing (YOUR REPLY CONTENT)
+Use EXACTLY ONE `<br>` between paragraphs in your reply (NOT two, NOT `<br><br>`):
 ```html
 <div>First paragraph</div>
 <br>
 <div>Second paragraph</div>
 <br>
 <div>Best,<br>Jeremy</div>
+```
+
+**DO NOT use double breaks in your reply:**
+```html
+<!-- WRONG - creates double spacing -->
+First paragraph<br><br>
+Second paragraph
 ```
 
 ### 5. Include FULL Conversation Thread

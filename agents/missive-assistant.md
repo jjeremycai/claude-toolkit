@@ -160,15 +160,19 @@ INSTRUCTIONS:
 
 REPLY FORMAT - MUST INCLUDE FULL NESTED THREAD:
 - Brief response (2-4 sentences)
-- Use ONE <br> between paragraphs
+- YOUR REPLY CONTENT: Use EXACTLY ONE <br> between paragraphs (NOT two, NOT <br><br>)
 - Include the ENTIRE conversation as nested blockquotes (not just the last message!)
 - PRESERVE signatures exactly as they appear in the original messages
-- Add EXTRA SPACING between messages for readability
+- QUOTED THREAD: Use 3x <br> between messages for readability
 
-Example for a 3-message thread:
-<div>Your response</div>
+YOUR REPLY (single <br> between paragraphs):
+<div>First paragraph of your response.</div>
+<br>
+<div>Second paragraph if needed.</div>
 <br>
 <div>Best,<br>Jeremy</div>
+
+THEN the quoted thread with extra spacing:
 <br>
 <br>
 <div>On [Date 3], [Sender 3] wrote:</div>

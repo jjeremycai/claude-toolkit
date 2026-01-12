@@ -43,14 +43,21 @@ missive_drafts (action: create, draft: {
 ### Reply Address
 Reply from the address the original email was sent TO (check `to_fields` of incoming message).
 
-### Paragraph Spacing
-Use ONE `<br>` between paragraphs:
+### Paragraph Spacing (YOUR REPLY CONTENT)
+Use EXACTLY ONE `<br>` between paragraphs in your reply:
 ```html
 <div>First paragraph</div>
 <br>
 <div>Second paragraph</div>
 <br>
 <div>Best,<br>Jeremy</div>
+```
+
+**DO NOT use double breaks in your reply:**
+```html
+<!-- WRONG - creates double spacing -->
+First paragraph<br><br>
+Second paragraph
 ```
 
 DO NOT use `<p>` tags - they create inconsistent spacing in email clients.
