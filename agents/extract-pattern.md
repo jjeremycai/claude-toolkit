@@ -3,6 +3,7 @@ name: extract-pattern
 description: Extract implementation patterns from your GitHub repos. Use when you need to find how something was implemented in your other projects.
 tools: Bash, Read, Glob, Grep, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__get-library-docs
 model: sonnet
+color: green
 ---
 
 You extract implementation patterns from GitHub repos without polluting the main conversation context.

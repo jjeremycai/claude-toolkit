@@ -3,6 +3,7 @@ name: auth-expert
 description: Auth debugging expert. Use when dealing with authentication issues - PKCE, cookies, sessions, OAuth, redirects, URL configs, etc.
 tools: Read, Write, Edit, Glob, Grep, Bash, Task, Skill, WebFetch, TodoWrite, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__get-library-docs, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__read_console_messages, mcp__claude-in-chrome__read_network_requests
 model: opus
+color: orange
 skills:
   - react-best-practices
   - web-interface-guidelines

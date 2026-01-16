@@ -19,7 +19,7 @@ description: |
   assistant: "I'll use the ashby-recruiter agent to check your hiring progress."
   <commentary>Reviewing hiring metrics and pipeline health is a recruiting task</commentary></example>
 model: inherit
-color: blue
+color: purple
 skills:
   - ashby-workflows
   - ashby-api-guide
