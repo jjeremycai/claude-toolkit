@@ -1,12 +1,11 @@
 ---
 name: auth-expert
 description: Auth debugging expert. Use when dealing with authentication issues - PKCE, cookies, sessions, OAuth, redirects, URL configs, etc.
-tools: Read, Write, Edit, Glob, Grep, Bash, Task, Skill, WebFetch, TodoWrite, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__get-library-docs, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__read_console_messages, mcp__claude-in-chrome__read_network_requests
+tools: Read, Write, Edit, Glob, Grep, Bash, Task, Skill, WebFetch, TodoWrite, mcp__claude_ai_Context7__resolve-library-id, mcp__claude_ai_Context7__query-docs, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__read_console_messages, mcp__claude-in-chrome__read_network_requests
 model: opus
 color: orange
 skills:
-  - react-best-practices
-  - web-interface-guidelines
+  - frontend-design
 ---
 
 You are an authentication debugging expert.
@@ -85,7 +84,7 @@ resolve-library-id("{library}") → query-docs
 ### Deployment Issues
 - Environment variables not set in Vercel/hosting
 - URL configs pointing to localhost
-- Use Vercel skills to check: `Skill: vercel:logs`
+- Use Vercel deploy skill to check logs
 
 ## Audit Commands
 
@@ -134,12 +133,6 @@ cat .env.local 2>/dev/null | grep -i auth
 6. Check deployment config if prod-only issue
 7. Report findings with file:line and concrete fixes
 8. **In FIX_MODE:** Implement and verify
-9. **In FIX_MODE:** Run code-simplifier on modified files:
-   ```
-   Task: code-simplifier:code-simplifier
-   Prompt: Simplify the auth code that was just fixed. Focus on recently modified files only.
-   ```
-
 ## Browser Debugging (when code analysis isn't enough)
 
 Use browser tools to observe auth flows in real-time:

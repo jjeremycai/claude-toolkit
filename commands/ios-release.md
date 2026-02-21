@@ -117,19 +117,19 @@ open build/APP.xcarchive
 ```
 Then: Distribute App -> App Store Connect -> Upload
 
-**Option B: CLI upload with altool**
+**Option B: CLI upload with xcrun**
 ```bash
-xcrun altool --upload-app \
-  -f build/export/APP.ipa \
-  -t ios \
-  --apiKey YOUR_API_KEY \
-  --apiIssuer YOUR_ISSUER_ID
+xcrun notarytool submit build/export/APP.ipa \
+  --key YOUR_API_KEY_PATH \
+  --key-id YOUR_KEY_ID \
+  --issuer YOUR_ISSUER_ID \
+  --wait
 ```
 
 ## Common Errors
 
 ### "No signing certificate"
-- Open Xcode -> Preferences -> Accounts -> Download Manual Profiles
+- Open Xcode -> Settings -> Accounts -> Download Manual Profiles
 - Or: `xcodebuild -downloadAllPlatforms`
 
 ### "Provisioning profile doesn't match"

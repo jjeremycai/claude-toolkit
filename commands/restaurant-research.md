@@ -1,14 +1,7 @@
 ---
-name: restaurant-research
 description: Research restaurants with comprehensive review data, pricing, and recommendations
-shouldInvokeAgentImmediately: true
-arguments:
-  - name: location
-    description: City or specific area (e.g., "Hong Kong TST", "Tokyo Shibuya")
-    required: false
-  - name: cuisine
-    description: Type of cuisine (optional, will ask if not provided)
-    required: false
+argument-hint: <location> [cuisine]
+allowed-tools: WebSearch, WebFetch, AskUserQuestion, Task, mcp__claude-in-chrome__*
 ---
 
 # Restaurant Research
@@ -52,7 +45,7 @@ A comprehensive restaurant research assistant that searches across multiple revi
 Consider using the Task tool to spawn subagents for parallel execution when:
 - **Researching 5+ restaurants**: Spawn one subagent per restaurant to gather reviews, pricing, and details in parallel
 - **Multi-platform searches**: Spawn subagents to search Google Maps, Reddit, OpenRice/Tabelog, and Michelin Guide simultaneously
-- **Availability checks**: Spawn one subagent per restaurant to check booking availability in parallel using agent-browser
+- **Availability checks**: Spawn one subagent per restaurant to check booking availability in parallel using Chrome browser automation
 
 Example subagent delegation:
 ```
@@ -110,66 +103,44 @@ Provide 1-2 "Editor's Choice" recommendations with clear reasoning for why they'
 
 When the user asks to check booking availability:
 
-**Primary Method - agent-browser:**
-- Use `agent-browser` CLI tool first for speed
-- **Run availability checks IN PARALLEL** for all restaurants using multiple bash commands
-- For each restaurant:
-  ```bash
-  agent-browser open "[booking-url]" && sleep 5 && agent-browser snapshot
-  ```
-- Look for calendar widgets, date pickers, available time slots
+Use Chrome browser automation (Claude in Chrome) for availability checks:
 
-**Fallback Method - Chrome Browser (when anti-bot detected):**
+1. `tabs_context_mcp` → get browser context
+2. `tabs_create_mcp` → create new tab
+3. For each restaurant:
+   - `navigate` to booking URL
+   - Wait 3-5 seconds for page load
+   - `read_page` to get accessibility tree
+   - `computer` with screenshot if needed to see calendar/availability
+4. Look for: calendar widgets, time slot selectors, "fully booked" messages, next available dates
+5. Report findings with screenshots if helpful
 
-If agent-browser encounters any of these issues:
-- "Access Denied" messages
-- Cloudflare captcha or bot protection
-- "Verify you are human" prompts
-- Timeout errors or ERR_ABORTED
-- Blank pages or 403 errors
+5. **Follow-Up Actions (MUST use AskUserQuestion)**
 
-Then switch to Chrome browser automation using Claude in Chrome tools:
+After presenting recommendations, ALWAYS use `AskUserQuestion` with multiple choice options:
 
-1. **Get browser context:**
-   ```
-   tabs_context_mcp with createIfEmpty: true
-   ```
+```
+AskUserQuestion with questions:
+[
+  {
+    "question": "What would you like to do next?",
+    "header": "Next step",
+    "options": [
+      {"label": "Check availability", "description": "Check booking availability for specific restaurants and dates"},
+      {"label": "Make a reservation", "description": "Book a table at one of these restaurants"},
+      {"label": "More options", "description": "Search for different restaurants or adjust criteria"},
+      {"label": "Done for now", "description": "I have what I need, thanks!"}
+    ],
+    "multiSelect": false
+  }
+]
+```
 
-2. **Create new tab for checks:**
-   ```
-   tabs_create_mcp
-   ```
+**If user selects "Make a reservation"**, follow up with another AskUserQuestion:
+- Which restaurant (list the top 3-4 from recommendations)
+- Then ask for date, time, party size using AskUserQuestion
 
-3. **For each restaurant, use the real browser:**
-   ```
-   navigate to booking URL
-   wait 3-5 seconds for page load
-   read_page to get accessibility tree
-   screenshot if needed to see calendar/availability
-   ```
-
-4. **Look for:**
-   - Calendar widgets showing available dates
-   - Time slot selectors
-   - "Fully booked" messages
-   - Next available date information
-   - Booking forms with date pickers
-
-5. **Report findings** with screenshots if helpful for user to see actual availability
-
-**Note:** Chrome browser automation bypasses anti-bot protection since it uses a real browser session, but is slower than agent-browser. Only use when necessary.
-
-5. **Reservation Offer**
-
-After presenting recommendations OR availability results, ask:
-- "Would you like me to make a reservation at any of these restaurants?"
-- If yes, ask for:
-  - Which restaurant
-  - Date and time
-  - Party size confirmation
-  - Any special requests
-
-Then use `agent-browser` to complete the booking.
+Then use Chrome browser automation to complete the booking.
 
 ## Research Guidelines
 
@@ -259,7 +230,7 @@ Then use `agent-browser` to complete the booking.
 
 ---
 
-Would you like me to make a reservation at either of these restaurants?
+[Then use AskUserQuestion tool for follow-up actions - see section 5]
 
 ## Implementation Notes
 
@@ -271,10 +242,11 @@ Would you like me to make a reservation at either of these restaurants?
 - **ALWAYS include Reddit searches** - Use queries like "[location] restaurant recommendations site:reddit.com" or "best [cuisine] [location] reddit"
 - Reddit often surfaces hidden gems and authentic local favorites not found on tourist sites
 - Use `AskUserQuestion` with multiple choice options for preference gathering
-- **Booking availability checks:** Try agent-browser first (faster), switch to Chrome browser automation if anti-bot protection detected
+- **Booking availability checks:** Use Chrome browser automation (Claude in Chrome)
 - Store location/cuisine as context for follow-up questions
 - Include source links at the bottom of the output for transparency (including relevant Reddit threads)
 - Fill in ALL table columns - use "—" if data is unavailable rather than leaving blank
 - The table must include 5-8 restaurants minimum for good comparison
 - When Reddit users mention specific restaurants repeatedly, prioritize those in recommendations
 - **Consider using subagents** - For 5+ restaurants or parallel availability checks, spawn Task tool subagents to work in parallel
+- **ALWAYS use AskUserQuestion for follow-up actions** - Never use raw text like "Would you like me to...?" - always present options via the AskUserQuestion tool with multiple choice format

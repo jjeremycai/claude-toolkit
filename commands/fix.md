@@ -1,11 +1,11 @@
 ---
-description: Execute fixes for issues identified by /review using @engineer subagents
+description: Execute fixes for issues identified by /audit using @engineer subagents
 argument-hint: [--critical-only] [--all]
 agent: plan
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, Task, WebFetch, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__get-library-docs
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, Task, WebFetch, mcp__claude_ai_Context7__resolve-library-id, mcp__claude_ai_Context7__query-docs
 ---
 
-Execute fixes for code issues identified by a prior `/review`. This command assumes `/review` has already been run and its output is available in the conversation.
+Execute fixes for code issues identified by a prior `/audit`. This command assumes `/audit` has already been run and its output is available in the conversation.
 
 Flags: $ARGUMENTS
 
@@ -16,19 +16,19 @@ Flags: $ARGUMENTS
 
 ## Prerequisites
 
-This command expects `/review` output in the conversation containing:
+This command expects `/audit` output in the conversation containing:
 - Issues with file paths and line numbers
 - Severity levels (critical/warning/suggestion)
 - Issue descriptions with realistic scenarios
 - Suggested fixes (if provided)
 
-If no review output is found, prompt the user to run `/review` first.
+If no review output is found, prompt the user to run `/audit` first.
 
 ## Execution
 
 ### 1. Parse Review Output
 
-Extract fixable issues from the prior `/review` output:
+Extract fixable issues from the prior `/audit` output:
 
 ```
 Issues to fix:
@@ -132,17 +132,6 @@ List any issues that couldn't be auto-fixed:
 - If all fixed and verified: Ready for commit
 - If some failed: List what needs manual attention
 - If tests fail: Show failure output
-
-### 6. Code Simplification
-
-After all fixes are verified and tests pass, run the code-simplifier agent on modified files:
-
-```
-Task: code-simplifier:code-simplifier
-Prompt: Simplify and refine the code that was just modified by /fix. Focus on the recently changed files only.
-```
-
-This ensures fixes don't introduce unnecessary complexity.
 
 ## Safety
 
